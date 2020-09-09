@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        
+
+        // var main;
+        // main = prompt("Enter a value");
+
+        // //String Conversion, from string to number
+        
+        // main = parseInt(main);
+        // alert(typeof(main));
+        // alert( 5 + main);
+        // console.log(alert);
+
+
+        // QUESTION A
+
+        // var step;
+        // step = prompt("Enter a value");
+
+        // if (step != null || step == undefined ){
+        //     alert(step);
+        // }
+
+        // else {
+
+        // }
+
+        // //QUESTION B
+
+        // var step2;
+        // step2 = prompt("Please Enter a value");
+
+        // step2 = parseInt(step2);
+
+        // if (step2 > 100 || step2 == 100){
+
+        //     alert("Century or Above")
+        // }
+        // else {
+            
+        // }
+
+
+        // SIMPLE USSD RECHARGE WITH JAVASCRIPT
+
+
+        question= "What would you like to do? \n\n"    
+        question1= question + "1. Airtime for self\n\n"
+        question2=  question1 + "2. Airtime for Others\n\n"
+        question3= question2 + "3. Data\n\n"
+        question4= prompt (question3 + "4. Transfer");
+
+
+
+        
+        //Data Function
+        var data = {
+
+    recharge : function data (){
+                
+                var amount =  prompt("1. 1.5GB for 1200 \n\n2. 2GB for 1500\n\n3. 2.5GB for 2000 \n\n4. 3GB for 2500") 
+                
+                if (amount == 1){
+                    prompt("Enter your PIN")
+                    let ans = confirm("Are you sure you want to make this transaction?")
+                    if (ans == true){
+                    alert("The Phone number has been credited with\n1.5GB worth of data")
+                    } else {
+                    alert("Transaction Cancelled")
+                    }
+                
+                }
+
+                else if (amount == 2){
+                    prompt("Enter your PIN")
+                    let ans2 = confirm("Are you sure you want to make this transaction?")
+                    if (ans2 == true){
+                    alert("The Phone number has been credited with\n2GB worth of data")
+                    } else {
+                    alert("Transaction Cancelled")
+                    }
+                
+                }
+
+                else if (amount == 3){
+                    prompt("Enter your PIN")
+                    let ans3 = confirm("Are you sure you want to make this transaction?")
+                    if (ans3 == true){
+                    alert("The Phone number has been credited with\n2.5GB worth of data")
+                    } else {
+                    alert("Transaction Cancelled")
+                     }
+                }
+
+                else if (amount == 4){
+                    prompt("Enter your PIN")
+                    let ans4 = confirm("Are you sure you want to make this transaction?")
+                    if (ans4 == true){
+                    alert("The Phone number has been credited with\n3GB worth of data")
+                    } else {
+                    alert("Transaction Cancelled")
+                    }
+
+                }
+                else{
+                    alert ("Error code inputed")
+                }
+        }
+
+         }
+
+
+            //Transfer Function
+
+        var transfer = {
+            trans : function transfer(){
+
+               let  question5 = prompt("Same bank OR Other Bank\n\n 1.Enter 1 for Same Bank \n\n 2. Enter 2 for other  bank")
+                if (question5 == 1) {
+                    prompt("Enter Acct. No")
+                    prompt("Enter Amonut")
+                    prompt("Enter PIN")
+                    let funds = confirm("Are you sure you want to make this transaction?")
+                    if (funds == true){
+                    alert("Recharge Successful")
+                    } else {
+                    alert("Transaction Cancelled")
+                     }
+
+                }
+
+                else if (question5 == 2){
+                    prompt("Enter Acct. No")
+                    prompt ("Select Bank:\n 1. UBA\n 2. Firstbank\n 3. Sterling Bank\n 4. Access Bank\n 5. Polaris Bank\n 6. Zenith Bank")
+                    prompt ("Enter amount")
+                    prompt ("Enter Pin")
+                    let funds2 = confirm("Are you sure you want to make this transaction?")
+                    if (funds2 == true){
+                    alert("Transfer Successful")
+                    } else {
+                    alert("Transaction Cancelled")
+                     }
+
+                }
+                }
+            }
+        
+        
+    
+
+            //Airtime recharge for Self
+            if (question4 == 1){
+                prompt("Enter amount")
+                prompt("Enter PIN")
+                let air = confirm("Are you sure you want to make this transaction?")
+                    if (air == true){
+                    alert("Recharge Successful")
+                    } else {
+                    alert("Transaction Cancelled")
+                     }
+            }
+
+            // Airtime Recharge for Others
+            else if (question4 == 2){
+                prompt("Enter phone number")
+                prompt ("Enter Amount")
+                prompt("Enter your PIN")
+                let air2 = confirm("Are you sure you want to make this transaction?")
+                    if (air2 == true){
+                    alert("Receiver Recharge Successful")
+                    } else {
+                    alert("Transaction Cancelled")
+                     }
+            }
+
+
+            // Data Recharge
+            else if (question4 == 3){
+                prompt ("Enter Phone Number")
+                prompt(data.recharge());
+
+            }
+            
+            //Funds Transfer
+            else if (question4 == 4) {
+                prompt (transfer.trans());
+            }
+    
+        
+
+    </script>
+</body>
+</html>
