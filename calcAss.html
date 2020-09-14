@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <script>
+
+function add(x, y){
+    alert (`${x} plus ${y} = ${x + y}`);
+}
+
+function subtract(x, y){
+    alert (`${x} minus ${y} = ${x - y}`);
+}
+
+function divide(x, y){
+    alert (`${x} divided by ${y} = ${x / y}`);
+}
+
+function multiply(x, y){
+    alert (` ${x} x ${y} = ${x * y}` );
+}
+
+let first = parseInt(prompt("Enter first Number"))
+let second = parseInt(prompt("Enter Second Number"))
+let operation = prompt(
+        "Choose Operation\n 1. Addition\n 2. Subtraction\n 3. Division\n 4. Multiplication") 
+operation = parseInt(operation)
+
+
+    if (operation == 1){
+        add(first, second)
+    } 
+    else if (operation == 2){
+        subtract(first, second)
+    }
+     else if (operation == 3){
+      divide(first, second)
+    }
+     else if (operation == 4){
+        multiply(first, second)
+    } else{
+        alert("Enter a valid Operator")
+    }
+
+
+
+
+    </script>
+</body>
+</html>
