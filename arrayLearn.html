@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+
+
+    <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Kufam&display=swap');
+
+    html    {
+        box-sizing: border-box;
+        }
+
+    *,
+    *::before,
+    *::after {
+            box-sizing: inherit;
+            }
+
+
+        body{
+            font-family: 'Kufam', cursive;
+            background-image: linear-gradient(to right top, #61dcf8, #40c7f1, #1db1e8, #009bde, #0d85d1);
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        #main{
+            height: 42vh;
+            margin-top: 10rem;
+            display: flex;
+            position: center;
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
+        .object{
+        
+            border-radius: 40px;
+            background-color: #f5f4f4;
+            box-shadow: inset -6px -3px 5px rgba(255, 255, 255, 0.750601),
+            inset 3px 6px 6px #C3D7E7, 
+            inset 4px 2px 6px #B1C5D5, 
+            inset 0px 2px 4px #C8D4E2;
+            width: 50vh;
+            margin: 0.5rem 0;
+            overflow: hidden;
+            padding: 10px 0 10px;
+
+        }
+
+        .object img{
+            width: 150px;
+            height: 150px;
+            display: inline-block;
+            position: relative;
+            border-radius: 40px;
+            border: 2px solid  #0a6396;
+        }
+
+        .object-text{
+            padding-top: 10px;
+            line-height: normal;
+        }
+
+        #add-btn {
+            margin: 2rem;
+            background-color: #0a6396;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 7px 7px;
+            font-weight: bold;
+            font-size: 30px;
+        }
+
+        #add-btn:hover{
+            background-color: #1195e2;
+        }
+
+        #delete-btn{
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 7px 7px;
+            font-weight: bold;
+            margin: 1rem 1rem;
+            
+        }
+
+        #delete-btn:hover{
+            background-color: #db2f2f;
+        }
+
+
+        #edit-btn{
+            background-color: #06771e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 7px 7px;
+            font-weight: bold;
+            margin-bottom: 2rem;
+            
+        }
+
+        
+        #edit-btn:hover{
+            background-color: #27ad10;
+        }
+
+
+    </style>
+</head>
+<body>
+    
+    <div id = "content">
+        <button onClick = "join()" id="add-btn">Add New User</button>
+    <div id="main">
+
+    </div>
+
+</div>
+
+    <script>
+
+
+
+
+
+
+    ////Declaring the static objects in an array.///////
+
+       let users = 
+       [
+        {
+            "pics": "11.jpg", 
+            "fullname": "Mark Jamilu",
+            "email": "markjamilu@gmail.com",
+            "phone": "09034678390"
+        },
+
+        {
+            "pics": "2.jpg",
+            "fullname": "Genada Williams",
+            "email": "zlatan45@gmail.com",
+            "phone": "09034678390"
+        },
+
+        {
+            "pics": "3.jpg", 
+            "fullname": "Rune Forza",
+            "email": "runeforza@gmail.com",
+            "phone": "09034678390"
+        }
+
+        ]
+
+       
+        
+
+
+                //Using the normal for loop method.
+                console.time("For_loop")
+
+        displayPeeps()
+        function displayPeeps(){
+
+            userDisp ='';
+            for (i=0; i<users.length; i++){
+
+               userDisp += `
+            <div id=${i} class="object">
+            <img src= "${users[i].pics}"><br>
+            <div class="object-text">
+             <strong>Full Name</strong> : ${users[i].fullname}<br>
+            <strong>Email</strong> : ${users[i].email}<br>
+            <strong>Phone</strong> : ${users[i].phone}<br>
+            </div>
+            <button onClick="deleteUser(${i})" id="delete-btn">Delete</button>
+            <button id="edit-btn" onClick="editUser(${i})">Edit</button>
+
+         </div>`
+            }
+
+            console.timeEnd("For_loop")
+            document.getElementById("main").innerHTML = userDisp;
+        }
+
+
+        ////Taking user inputed objects into the Array using an adding function /////////
+    function join(){
+    
+   let value = {
+        "pics": prompt("Load Up Profile pics:"),
+        "fullname": prompt("Enter FullName:"),
+        "email": prompt("Enter email"),
+        "phone": parseInt(prompt("Enter Phone Number:"))
+    
+    }
+    users.push(value)
+    displayPeeps()
+
+}
+
+/////Deleting inputed details from each form /////////bin
+
+function deleteUser(id)
+{
+    if(confirm(`Are you sure you certain that you want to delete ${users[id].fullname} ? `)){
+    users.splice(0,1) //A splice function works in tandem with indexes, right now we are targeting the initial position of each and any objet and deleting it
+       displayPeeps()
+    }
+    
+
+}
+
+
+///////Editing data from the DOM ///////
+function editUser(id)
+{
+    let userEditing = 
+    {
+               "pics" :  prompt("Load Up profile pics",users[id].pics),
+               "fullName" : prompt("Enter your full Name",users[id].fullName),
+               "email" :  prompt("Enter your email",users[id].email),
+               "phone" :  prompt("Enter your phone",users[id].phone)
+
+    }
+    users[id] = userEditing
+    displayPeeps()
+
+}
+
+
+            
+
+            ///////// Proven with the time check, the For Loop executes faster
+
+
+            // Using the for ( let VarName of ArrayName) method.
+
+            // console.time("For_let")
+
+            // for (let oneuser of users){
+            //     userDisp += `
+            //     <div>
+            //     <img src= "${oneuser.pics}" style= "max-height: 100px">
+            //     <strong>Full Name</strong> : ${oneuser.fullname}<br>
+            //     <strong>Email</strong> : ${oneuser.email}<br>
+            //     <strong>Phone</strong> : ${oneuser.phone}<br>
+
+            // </div> <hr>`
+            // }
+
+            // console.timeEnd("For_let")
+            // document.getElementById("main").innerHTML = userDisp;
+
+    
+
+
+    </script>
+</body>
+</html>
