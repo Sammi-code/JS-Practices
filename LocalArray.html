@@ -130,12 +130,60 @@
         font-size: 20px;
     }
 
+
+    .one-btn{
+        margin: 0 1rem;
+        background-color:#03495a;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 7px 7px;
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+
+    .all-btn{
+        margin: 0 1rem;
+        background-color:#03495a;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 7px 7px;
+        font-weight: bold;
+        font-size: 15px;
+    }
+
+    .part-btn{
+        margin: 0 1rem;
+        background-color:#03495a;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        padding: 7px 7px;
+        font-weight: bold;
+        font-size: 15px;
+    }
+
     .add-btn:hover{
         background-color: #056d1c;
     }
 
     .up-btn:hover{
         background-color: #a06206;
+    }
+
+
+    .part-btn:hover{
+        background-color: #067c99;
+    }
+
+    .one-btn:hover{
+        background-color: #067c99;
+    }
+
+    .all-btn:hover{
+        background-color: #067c99;
     }
 
     #delete-btn{
@@ -168,6 +216,10 @@
     
     #edit-btn:hover{
         background-color: #27ad10;
+    }
+
+    #searchbtn{
+        display: flex;
     }
 
 
@@ -227,14 +279,29 @@
         <div class= "form-input">
         <input type="text" id="pics" placeholder="Profile Picture">
         </div>
+
         <div class= "form-input">
             <div class= "form-btn">
-        <button class="add-btn"> Add new user</button>
-        <button class="up-btn" onclick="Update()"> Update user record</button>
+                <button class="add-btn"> Add new user</button>
+                <button class="up-btn" onclick="Update()"> Update user record</button>
+            </div>
         </div>
-        </div>
+        <div class= "form-input">
+            <input type="text" id= "finders" placeholder = "Search by name">
+        </div>    
+            <div id="searchbtn">
+            <button class= "one-btn" onclick="search()">Find one record</button>
+            <button class= "all-btn" onclick="searchAll()">Find all records</button>
+            <button class= "part-btn" onclick="searchPartMatch()">Find Part Record</button>
+            </div>
+        
     </div>
     <h3>Users</h3>
+
+    <h3 id="recordFound"> </h3>
+    <div id= "Users">
+
+    </div>
 
     <div id="main">
         <!-- Where it all displays-->
@@ -248,10 +315,10 @@
         users =JSON.parse(localStorage.getItem("freshUsers"))
 
        // Creating a new storage if none previously exists 
-       if(users == null){
-          users = [];
+    //    if(users == null){
+    //       users = [];
 
-       }
+    //    }
 
        //Adding new user input via Click event
        document.querySelector('.add-btn').addEventListener('click', () => {
@@ -303,6 +370,7 @@
             if (con == true) {
                 users.splice(id, 1);
 
+                //After deleting, you then need to set the updated array in the local storage!
                 localStorage.setItem("freshUsers", JSON.stringify(users))
             }
             displayPeeps()
@@ -311,7 +379,7 @@
         ///////////////////////////////////////////////////
       
          // Function to Edit User Details
-
+        //Using Prompt
 
          //NOTE: I need to find how to edit with Form and not Prompt.
         //  function editUser(id) {
@@ -330,6 +398,8 @@
         // }
 
 
+         // Function to Edit User Details
+        //Using form fill HTML edit
         
     function triggerEdit(i){
 
@@ -361,6 +431,64 @@
     localStorage.setItem("freshUsers", JSON.stringify(users))
     displayPeeps()
     
+
+ }
+
+
+ ///////////////////Searching for users ///////////////////
+ function search(){
+    param = document.getElementById("finders").value
+    userObject = users.find(x=>x.fullname==param)
+    if (userObject==undefined || userObject==null){
+        alert("No records found for " + param)
+    }
+    else {
+            users=[];
+            users.push(userObject)
+            document.getElementById("recordFound").innerHTML = users.length + " record found"  
+
+
+        //document.getElementById("recordFound").innerHTML = users.length + "records found"
+        displayPeeps()
+    }
+
+ }
+
+
+ function searchAll(){
+    param = document.getElementById("finders").value
+    users = users.filter(x=>x.fullname==param)
+    if (users==undefined || users==null){
+        alert("No records found")
+    }
+    else {
+        if(users.length > 1){
+        document.getElementById("recordFound").innerHTML = users.length + " records found"
+        }
+        else{
+        document.getElementById("recordFound").innerHTML = users.length + " record found"    
+        }
+        displayPeeps()
+    }
+
+ }
+
+
+ function searchPartMatch(){
+    param = document.getElementById("finders").value
+    users = users.filter(x => x.fullname.includes(param))
+    if (users == undefined || users == null){
+        alert(`No record found for ${param}`);
+    }
+    else {
+        if(users.length > 1){
+        document.getElementById("recordFound").innerHTML = users.length + "records found"
+        }
+        else{
+        document.getElementById("recordFound").innerHTML = users.length + " record found"    
+        }
+        displayPeeps()
+    }
 
  }
 
