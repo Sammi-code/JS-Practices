@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise Audio</title>
+</head>
+
+<body>
+    <script>
+        createVideo('https://cdn.trendybeatz.com/video/WizKid-Smile-Video-ft-H.E.R.mp4').then(
+            playVideo()
+        ).catch((error) => {
+            alert(error)
+        })
+
+        async function createVideo(videoSource) {
+            return new Promise((resolve, reject) => {
+
+                // Create audio and source
+                let video = document.createElement('video')
+                let source = document.createElement('source')
+
+                // Set attributes
+                video.setAttribute('controls', 'controls')
+                video.setAttribute('id', 'video')
+
+                // Add src
+                source.src = videoSource
+                video.appendChild(source)
+
+                video.onload = () => resolve(video)
+
+                video.onerror = () => reject(new Error('Audio source not found'))
+
+                document.body.appendChild(video) 
+            })
+        }
+
+
+        function playVideo() {
+            
+            return new Promise((resolve, reject) => {
+
+               x = document.getElementById("video")
+               resolve(x.play());
+            })
+        }
+    </script>
+</body>
+
+</html>
