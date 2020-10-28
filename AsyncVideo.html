@@ -16,7 +16,7 @@
         })
 
         async function createVideo(videoSource) {
-            return new Promise((resolve, reject) => {
+          let checker = await new Promise((resolve, reject) => {
 
                 // Create audio and source
                 let video = document.createElement('video')
@@ -43,8 +43,11 @@
             
             return new Promise((resolve, reject) => {
 
+                setTimeout(() => {
                x = document.getElementById("video")
                resolve(x.play());
+                
+            }, 700);
             })
         }
     </script>
